@@ -178,6 +178,24 @@ class CreatePedadoTables extends Migration
                 ->onUpdate('cascade')->onDelete('cascade');
 
         });
+
+        Schema::create('relawans', function (Blueprint $table) {
+          $table->increments('relawan_id');
+          $table->string('nama');
+          $table->text('slug');
+          $table->text('images');
+          $table->enum('status',['Aktif','NonAktif'])->default('Aktif');
+          $table->text('alamat');
+          $table->timestamps();
+        });
+
+        Schema::create('videos', function (Blueprint $table) {
+          $table->increments('video_id');
+          $table->string('title');
+          $table->text('slug');
+          $table->enum('status',['Aktif','NonAktif'])->default('NonAktif');
+          $table->timestamps();
+        });
     }
 
     /**
@@ -187,6 +205,8 @@ class CreatePedadoTables extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('videos');
+        Schema::dropIfExists('relawans');
         Schema::dropIfExists('konfir_bayar');
         Schema::dropIfExists('banks');
         Schema::dropIfExists('ratings');

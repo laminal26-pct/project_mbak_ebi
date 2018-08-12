@@ -3,11 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kontak;
+use App\Models\Relawan;
 use Illuminate\Http\Request;
 use Validator, Session;
 
 class KontakController extends Controller
 {
+    protected function relawan()
+    {
+      $relawan = Relawan::where('status','Aktif')->get();
+      return $relawan;
+    }
+
+    public function relawanShow($slug) {
+      $relawan = Relawan::select('nama','images','status','alamat')->where('slug',$slug)->first();
+      if ($relawan) {
+        return response()->json($relawan, 201);
+      }
+      return response()->json(['message' => 'Not avaiable'],404);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +40,8 @@ class KontakController extends Controller
      */
     public function create()
     {
-        return view('frontend.kontak');
+        $relawan = $this->relawan();
+        return view('frontend.kontak', compact('relawan'));
     }
 
     /**

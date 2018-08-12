@@ -195,6 +195,7 @@
         $('#lfm').filemanager('image');
         $('#beritatable').DataTable({'pageLength': 25});
         $('#produktable').DataTable({'pageLength': 25});
+        
         var editor_config = {
           path_absolute : "/",
           selector: "#description",

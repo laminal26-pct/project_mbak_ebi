@@ -1559,13 +1559,14 @@ Pre-Footer and pre-footer elements
 
 /* pre-footer photostream */
 .pre-footer .photo-stream li {
-	margin: 4px 5px 4px 0;
+	margin: 10px 10px 10px 0;
 	display: inline-block;
 }
 .pre-footer .photo-stream img {
-	width: 54px;
-	height: 54px;
+	width: 100px;
+	height: 100px;
 	border: solid 2px #9ca5ae;
+	border-radius: 50px !important;
 }
 .pre-footer .photo-stream img:hover {
 	border-color: #E84D1C;

@@ -7,11 +7,25 @@ use \Cart as Cart;
 use App\Models\Produk;
 use App\Models\Order;
 use App\Models\ProdukOrder;
+use App\Models\Relawan;
 use Validator, Mail, Session;
 use App\Mail\Pemesanan;
 
 class CartController extends Controller
 {
+    protected function relawan()
+    {
+      $relawan = Relawan::where('status','Aktif')->get();
+      return $relawan;
+    }
+
+    public function relawanShow($slug) {
+      $relawan = Relawan::select('nama','images','status','alamat')->where('slug',$slug)->first();
+      if ($relawan) {
+        return response()->json($relawan, 201);
+      }
+      return response()->json(['message' => 'Not avaiable'],404);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +33,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('frontend.cart.index');
+        $relawan = $this->relawan();
+        return view('frontend.cart.index', compact('relawan'));
     }
 
     /**
@@ -126,7 +141,8 @@ class CartController extends Controller
       $cek = Cart::total();
       $total = preg_replace("/([^0-9\\.])/i","",$cek);
       $all = $kodeUnik + $total;
-      return view('frontend.cart.pesan',compact('kodeUnik','total','all'));
+      $relawan = $this->relawan();
+      return view('frontend.cart.pesan',compact('kodeUnik','total','all','relawan'));
     }
 
     public function postPesan(Request $request)

@@ -51,6 +51,9 @@
     <div class="container">
       <!-- BEGIN SIDEBAR & CONTENT -->
       <div class="row margin-bottom-40">
+        <video src="videofile.ogg" autoplay poster="posterimage.jpg" class="margin-bottom-10" width="100%" height="300px">
+          
+        </video>
         <!-- BEGIN CONTENT -->
         <div class="col-md-12 col-sm-12">
           <h1>Berita</h1>

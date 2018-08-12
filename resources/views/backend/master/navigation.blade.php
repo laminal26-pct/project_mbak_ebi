@@ -131,6 +131,18 @@
         </li>
       </ul>
     </li>
+    <li class="{{set_active('info-relawan.index')}}">
+      <a href="{{route('info-relawan.index')}}">
+        <i class="fa fa-users"></i>
+        <span>Info Relawan</span>
+      </a>
+    </li>
+    <li class="{{set_active('video.index')}}">
+      <a href="{{route('video.index')}}">
+        <i class="fa fa-video-camera"></i>
+        <span>Video</span>
+      </a>
+    </li>
     <li>
       <a href="{{route('activity')}}">
         <i class="fa fa-tasks"></i>

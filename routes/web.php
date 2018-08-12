@@ -71,9 +71,11 @@ Route::group(['prefix' => '', 'middleware' => ['web','activity']], function () {
   Route::get('/verifikasi/terima-barang/{email}/{kode_order}/{kode_unik}/','HomepageController@terima_brg')->name('terima.barang');
   Route::post('/penilaian/pemesanan/produk/{kode_order}','HomepageController@penilaian')->name('penilaian');
 
+  Route::get('/beranda/relawan/{slug}', 'HomepageController@relawanShow')->name('relawan.modal');
   // Errors
   Route::get('/404', function() {
-    return view('frontend.errors.404');
+    $relawan = \App\Models\Relawan::where('status','Aktif')->get();
+    return view('frontend.errors.404', compact('relawan'));
   })->name('404');
 });
 
@@ -97,7 +99,7 @@ Route::group(['prefix' => 'dashboard/administrator', 'middleware' => ['auth','ro
 
   // Kontak
   Route::resource('/kontak','KontakController')->only(['index','show','destroy']);
-  
+
   // Order Request
   Route::resource('/order', 'OrderController')->except(['create','store','edit','update']);
   Route::patch('/order/pembayaran/{kode_order}', 'OrderController@upPembayaran')->name('order.pembayaran');
@@ -146,6 +148,8 @@ Route::group(['prefix' => 'dashboard/administrator', 'middleware' => ['auth','ro
   Route::post('/albums/{album_id}/tambah/foto/simpan','PhotoController@store')->name('photos.store');
   Route::delete('/albums/{album_id}/hapus/foto/{photo_id}','PhotoController@destroy')->name('photos.destroy');
 
+  Route::resource('/info-relawan', 'RelawanController');
+  Route::resource('/video', 'VideoController');
 });
 
 // Editor
