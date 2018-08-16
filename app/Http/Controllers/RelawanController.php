@@ -43,7 +43,7 @@ class RelawanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make(request()->all(), [
-          'nama' => 'required', 'fupload' => 'required', 'post_status' => 'required', 'alamat' => 'required'
+          'nama' => 'required', 'fupload' => 'required', 'join' => 'required', 'post_status' => 'required', 'alamat' => 'required'
         ]);
 
         if($validator->fails()) {
@@ -59,6 +59,7 @@ class RelawanController extends Controller
           'nama' => $request->nama,
           'images' => $img,
           'slug' => str_slug(sha1($request->nama),'-'),
+          'join' => $request->join,
           'status' => $request->post_status,
           'alamat' => $request->alamat
         ]);
@@ -103,7 +104,7 @@ class RelawanController extends Controller
     public function update(Request $request, $slug)
     {
       $validator = Validator::make(request()->all(), [
-        'nama' => 'required', 'images' => 'required', 'status' => 'required', 'alamat' => 'required'
+        'nama' => 'required', 'images' => 'required', 'join' => 'required', 'status' => 'required', 'alamat' => 'required'
       ]);
 
       if($validator->fails()) {
@@ -119,6 +120,7 @@ class RelawanController extends Controller
       $relawan->update([
         'nama' => $request->nama,
         'images' => $img,
+        'join' => $request->join,
         'slug' => str_slug(sha1($request->nama),'-'),
         'status' => $request->status,
         'alamat' => $request->alamat

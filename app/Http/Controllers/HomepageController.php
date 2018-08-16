@@ -34,7 +34,7 @@ class HomepageController extends Controller
     }
 
     public function relawanShow($slug) {
-      $relawan = Relawan::select('nama','images','status','alamat')->where('slug',$slug)->first();
+      $relawan = Relawan::select('nama','images','status','alamat','join')->where('slug',$slug)->first();
       if ($relawan) {
         return response()->json($relawan, 201);
       }

@@ -7,17 +7,17 @@
           <div class="photo-stream">
             <h2>Info Relawan</h2>
             <ul class="list-unstyled" id="relawan">
-              @php($i = 1)
-              @if (count($relawan) > 0)
-                @foreach ($relawan as $k)
+              <?php ($i = 1); ?>
+              <?php if(count($relawan) > 0): ?>
+                <?php $__currentLoopData = $relawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <li>
-                    <input type="hidden" name="relawan" class="d" value="{{$k->slug}}">
-                    <a href="#detailrelawan" data-toggle="modal" data-backdrop="static" title="{{$k->nama}}">
-                      <img alt="" src="{{asset($k->images)}}">
+                    <input type="hidden" name="relawan" class="d" value="<?php echo e($k->slug); ?>">
+                    <a href="#detailrelawan" data-toggle="modal" data-backdrop="static" title="<?php echo e($k->nama); ?>">
+                      <img alt="" src="<?php echo e(asset($k->images)); ?>">
                     </a>
                   </li>
-                @endforeach
-              @endif
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+              <?php endif; ?>
             </ul>
           </div>
         </div>
@@ -68,23 +68,23 @@
   <!-- Load javascripts at bottom, this will reduce page load time -->
   <!-- BEGIN CORE PLUGINS (REQUIRED FOR ALL PAGES) -->
   <!--[if lt IE 9]>
-  <script src="{{asset('assets/plugins/respond.min.js')}}"></script>
+  <script src="<?php echo e(asset('assets/plugins/respond.min.js')); ?>"></script>
   <![endif]-->
-  <script src="{{asset('assets/plugins/jquery.min.js')}}"></script>
-  <script src="{{asset('assets/plugins/jquery-migrate.min.js')}}"></script>
-  <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
-  <script src="{{asset('assets/corporate/scripts/back-to-top.js')}}"></script>
+  <script src="<?php echo e(asset('assets/plugins/jquery.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/plugins/jquery-migrate.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/plugins/bootstrap/js/bootstrap.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/corporate/scripts/back-to-top.js')); ?>"></script>
   <!-- END CORE PLUGINS -->
-  @yield('js')
+  <?php echo $__env->yieldContent('js'); ?>
   <!-- BEGIN PAGE LEVEL JAVASCRIPTS (REQUIRED ONLY FOR CURRENT PAGE) -->
-  <script src="{{asset('assets/plugins/fancybox/source/jquery.fancybox.pack.js')}}"></script><!-- pop up -->
-  <script src="{{asset('assets/plugins/owl.carousel/owl.carousel.min.js')}}"></script><!-- slider for products -->
-  <script src="{{asset('assets/plugins/jquery.flexslider-min.js')}}"></script>
-  <script src="{{asset('assets/plugins/jquery-mixitup/jquery.mixitup.min.js')}}"></script>
-  <script src="{{asset('assets/corporate/scripts/layout.js')}}"></script>
-  <script src="{{asset('assets/pages/scripts/bs-carousel.js')}}"></script>
-  <script src="{{asset('assets/pages/scripts/portfolio.js')}}"></script>
-  <script src="{{asset('assets/plugins/sweetalert/dist/sweetalert.min.js')}}"></script>
+  <script src="<?php echo e(asset('assets/plugins/fancybox/source/jquery.fancybox.pack.js')); ?>"></script><!-- pop up -->
+  <script src="<?php echo e(asset('assets/plugins/owl.carousel/owl.carousel.min.js')); ?>"></script><!-- slider for products -->
+  <script src="<?php echo e(asset('assets/plugins/jquery.flexslider-min.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/plugins/jquery-mixitup/jquery.mixitup.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/corporate/scripts/layout.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/pages/scripts/bs-carousel.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/pages/scripts/portfolio.js')); ?>"></script>
+  <script src="<?php echo e(asset('assets/plugins/sweetalert/dist/sweetalert.min.js')); ?>"></script>
 
   <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -137,7 +137,7 @@
                 text: 'Something went wrong!'
               });
             } else {
-              $b.eq(0).attr('src','{{url()->full()}}'+data.images);
+              $b.eq(0).attr('src','<?php echo e(url()->full()); ?>'+data.images);
               let tr_str = '';
               tr_str = "<tr>" +
                           "<td>Nama Relawan : </td>" +
@@ -169,7 +169,7 @@
       return true;
     }
   </script>
-  @yield('extra-js')
+  <?php echo $__env->yieldContent('extra-js'); ?>
   <!-- END PAGE LEVEL JAVASCRIPTS -->
 
 </html>

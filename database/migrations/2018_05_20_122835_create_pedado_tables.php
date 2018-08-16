@@ -185,6 +185,7 @@ class CreatePedadoTables extends Migration
           $table->text('slug');
           $table->text('images');
           $table->enum('status',['Aktif','NonAktif'])->default('Aktif');
+          $table->char('join',4);
           $table->text('alamat');
           $table->timestamps();
         });
