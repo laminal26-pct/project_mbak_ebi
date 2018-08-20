@@ -1,7 +1,7 @@
 /* here you can put your own css to customize and override the theme */
 .page-slider {
   //margin: 0 auto;
-  min-height: 300px;
+  min-height: 400px;
   //background: #fff url(../images/loader.gif) no-repeat center center;
   width: 100%;
   //float: left;
@@ -18,13 +18,13 @@
 .flexslider .slides {
   position: relative;
   overflow: hidden;
-  height: 300px;
+  height: 400px;
 }
 .flexslider .slides li {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 300px;
+  min-height: 400px;
   position: relative;
   opacity: 1;
   z-index: 1;
@@ -75,5 +75,12 @@
 @media only screen and (min-width: 960px and max-width: 1080px) {
   .kotak {
     margin: 90px 50px 0px;
+  }
+}
+
+.scrollingRelawan {
+  overflow-x: auto; overflow-y: hidden; white-space: nowrap;-webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

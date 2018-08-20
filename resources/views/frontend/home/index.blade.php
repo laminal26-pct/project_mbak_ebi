@@ -51,16 +51,13 @@
     <div class="container">
       <!-- BEGIN SIDEBAR & CONTENT -->
       <div class="row margin-bottom-40">
-        <video src="videofile.ogg" autoplay poster="posterimage.jpg" class="margin-bottom-10" width="100%" height="300px">
-          
-        </video>
         <!-- BEGIN CONTENT -->
         <div class="col-md-12 col-sm-12">
-          <h1>Berita</h1>
           <div class="content-page">
+            <h1>Berita</h1>
             <div class="row">
               <!-- BEGIN LEFT SIDEBAR -->
-              <div class="col-md-9 col-sm-9 blog-posts">
+              <div class="col-md-8 col-sm-8 blog-posts">
                 @if (count($news))
                   @foreach ($news as $key)
                     <div class="row">
@@ -90,7 +87,10 @@
               <!-- END LEFT SIDEBAR -->
 
               <!-- BEGIN RIGHT SIDEBAR -->
-              <div class="col-md-3 col-sm-3 blog-sidebar">
+              <div class="col-md-4 col-sm-4 blog-sidebar">
+                <video src="videofile.ogg" autoplay poster="posterimage.jpg" style="border: 1px solid #000" width="100%">
+
+                </video>
                 <!-- CATEGORIES START -->
                 <h2 class="no-top-space">Kategori</h2>
                 <ul class="nav sidebar-categories margin-bottom-40">

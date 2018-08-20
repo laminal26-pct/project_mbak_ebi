@@ -5,20 +5,22 @@
         <!-- BEGIN BOTTOM ABOUT BLOCK -->
         <div class="col-md-12 col-sm-12 pre-footer-col">
           <div class="photo-stream">
-            <h2>Info Relawan</h2>
-            <ul class="list-unstyled" id="relawan">
-              <?php ($i = 1); ?>
-              <?php if(count($relawan) > 0): ?>
-                <?php $__currentLoopData = $relawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                  <li>
-                    <input type="hidden" name="relawan" class="d" value="<?php echo e($k->slug); ?>">
-                    <a href="#detailrelawan" data-toggle="modal" data-backdrop="static" title="<?php echo e($k->nama); ?>">
-                      <img alt="" src="<?php echo e(asset($k->images)); ?>">
-                    </a>
-                  </li>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-              <?php endif; ?>
-            </ul>
+            <h2>Info Relawan RBC</h2>
+            <div class="scrollingRelawan">
+              <ul class="list-unstyled" id="relawan">
+                <?php ($i = 1); ?>
+                <?php if(count($relawan) > 0): ?>
+                  <?php $__currentLoopData = $relawan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li>
+                      <input type="hidden" name="relawan" class="d" value="<?php echo e($k->slug); ?>">
+                        <a href="#detailrelawan" data-toggle="modal" data-backdrop="static" title="<?php echo e($k->nama); ?>">
+                        <img alt=<?php echo e($k->nama); ?>"" src="<?php echo e(asset($k->images)); ?>">
+                      </a>
+                    </li>
+                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
+              </ul>
+            </div>
           </div>
         </div>
         <!-- END BOTTOM ABOUT BLOCK -->
@@ -140,20 +142,16 @@
               $b.eq(0).attr('src','<?php echo e(url()->full()); ?>'+data.images);
               let tr_str = '';
               tr_str = "<tr>" +
-                          "<td>Nama Relawan : </td>" +
-                          "<td>"+data.nama+"</td>" +
+                          "<td>Nama Relawan : "+data.nama+"</td>" +
                        "</tr>" +
                        "<tr>" +
-                          "<td>Status Relawan : </td>" +
-                          "<td>"+data.status+"</td>" +
+                          "<td>Status Relawan : "+data.status+"</td>" +
                        "</tr>" +
                        "<tr>" +
-                          "<td>Alamat Relawan : </td>" +
-                          "<td>"+data.alamat+"</td>" +
+                          "<td>Alamat Relawan : "+data.alamat+"</td>" +
                        "</tr>" +
                        "<tr>" +
-                          "<td>Tahun Gabung : </td>" +
-                          "<td>"+data.join+"</td>" +
+                          "<td>Tahun Gabung : "+data.join+"</td>" +
                        "</tr>";
               $('#detailtabel').append("<tbody>"+tr_str+"</tbody>");
             }

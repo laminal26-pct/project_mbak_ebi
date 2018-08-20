@@ -33,21 +33,14 @@
                 </div>
               </div>
               <div class="form-group">
-                {!! Form::label('join','Tahun Bergabung', ['class' => 'col-md-2 control-label']) !!}
+                {!! Form::label('join','TAHUN BERGABUNG', ['class' => 'col-md-2 control-label']) !!}
                 <div class="col-md-9">
-                  <div class="input-group">
-                    <select class="form-control" name="join">
-                      <?
-                        $i = 2010;
-                        $l = 10;
-                        $d = date('Y', strtotime('now'))
-                        $d += $l;
-                      ?>
-                      @for ($i=2010; $i < $d; $i++)
-                        <option value="{{$i}}">{{$i}}</option>
-                      @endfor
-                    </select>
-                  </div>
+                  <select class="form-control" name="join">
+                    @php( $d = date('Y', strtotime('now')) )
+                    @for ($i = 2010; $i <= $d; $i++)
+                      <option value="{{$i}}">{{$i}}</option>
+                    @endfor
+                  </select>
                 </div>
               </div>
               <div class="form-group">

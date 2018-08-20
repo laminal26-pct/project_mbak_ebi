@@ -193,6 +193,7 @@ class CreatePedadoTables extends Migration
         Schema::create('videos', function (Blueprint $table) {
           $table->increments('video_id');
           $table->string('title');
+          $table->text('videos');
           $table->text('slug');
           $table->enum('status',['Aktif','NonAktif'])->default('NonAktif');
           $table->timestamps();

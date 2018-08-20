@@ -131,13 +131,13 @@
         </li>
       </ul>
     </li>
-    <li class="<?php echo e(set_active('info-relawan.index')); ?>">
+    <li class="<?php echo e(set_active('info-relawan.index')); ?> <?php echo e(set_active('info-relawan.create')); ?> <?php echo e(set_active('info-relawan.edit')); ?> <?php echo e(set_active('info-relawan.show')); ?>">
       <a href="<?php echo e(route('info-relawan.index')); ?>">
         <i class="fa fa-users"></i>
         <span>Info Relawan</span>
       </a>
     </li>
-    <li class="<?php echo e(set_active('video.index')); ?>">
+    <li class="<?php echo e(set_active('video.index')); ?> <?php echo e(set_active('video.create')); ?> <?php echo e(set_active('video.edit')); ?> <?php echo e(set_active('video.show')); ?>">
       <a href="<?php echo e(route('video.index')); ?>">
         <i class="fa fa-video-camera"></i>
         <span>Video</span>

@@ -17,16 +17,16 @@
             <table class="table">
               <tbody>
                 <tr>
-                  <td>Nama Relawan</td>
-                  <td>{{$relawan->nama}}</td>
+                  <td>Nama Relawan : {{$relawan->nama}}</td>
                 </tr>
                 <tr>
-                  <td>Status Relawan</td>
-                  <td>{{$relawan->status}}</td>
+                  <td>Status Relawan : {{$relawan->status}}</td>
                 </tr>
                 <tr>
-                  <td>Alamat Relawan</td>
-                  <td>{{$relawan->alamat}}</td>
+                  <td>Tahun Bergabung : {{$relawan->join}}</td>
+                </tr>
+                <tr>
+                  <td>Alamat Relawan : {{$relawan->alamat}}</td>
                 </tr>
               </tbody>
             </table>

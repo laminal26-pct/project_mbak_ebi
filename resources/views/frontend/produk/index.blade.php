@@ -33,10 +33,10 @@
                           <div class="pricing-head">
                               <h3>
                                 <a href="{{ route('produk.detail',$key->slug)}}" style="color:white; text-decoration: none;">
-                                {{$key->title}}
+                                {{substr($key->title,0,15)}}...
                                 </a>
                               </h3>
-                              <img src="{{asset($key->images)}}" style="width: 100%; height: 100%; max-height:150px; max-width:100%;">
+                              <img src="{{asset($key->images)}}" style="width: 100%; height: 100%; max-height:200px; max-width:100%;">
                               <h4><i>Rp</i>&nbsp;<i>{{number_format($key->harga,0,",",".")}}</i>
                               </h4>
                           </div>

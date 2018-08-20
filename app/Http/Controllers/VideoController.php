@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Validator;
 
 class VideoController extends Controller
 {
@@ -19,7 +21,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-      
+      $video = Video::all();
+      return view('backend.video.index', compact('video'));
     }
 
     /**
@@ -29,7 +32,7 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.video.create');
     }
 
     /**
@@ -40,7 +43,29 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+          'title' => 'required', 'filevideo' => 'max:100040|required', 'status' => 'required'
+        ];
+
+        $validator = Validator::make(request()->all(), $rules);
+        /*
+        if ($validator->fails()) {
+          return redirect()->back()->withErrors($validator)->withInput();
+        }
+        */
+        $file = Input::file('filevideo');
+        $random_name = str_random(16);
+        $destinationPath = 'video/';
+        $extension = $file->getClientOriginalExtension();
+        $filename = $random_name.'_video.'.$extension;
+        $uploadSuccess = Input::file('filevideo')->move($destinationPath,$filename);
+        $video = Video::create([
+          'title' => $request->title,
+          'videos' => $filename,
+          'slug' => str_slug(sha1($request->title),'-'),
+          'status' => $request->status
+        ]);
+        return redirect()->route('video.show',$video->slug);
     }
 
     /**
@@ -49,9 +74,10 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function show(Video $video)
+    public function show($slug)
     {
-        //
+        $video = Video::where('slug',$slug)->fisrt();
+        return view('backend.video.show', compact('video'));
     }
 
     /**
@@ -60,9 +86,10 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function edit(Video $video)
+    public function edit($slug)
     {
-        //
+        $video = Video::where('slug',$slug)->fisrt();
+        return view('backend.video.edit',compact('video'));
     }
 
     /**
@@ -72,9 +99,32 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Video $video)
+    public function update(Request $request, $slug)
     {
-        //
+      $rules = [
+        'title' => 'required', 'filevideo' => 'mimes:mp4,mkv,MP4,MKV|max:100040|required', 'status' => 'required'
+      ];
+
+      $validator = Validator::make(request()->all(), $rules);
+
+      if ($validator->fails()) {
+        return redirect()->route('video.edit',$slug)->withErrors($validator)->withInput();
+      }
+
+      $file = Input::file('filevideo');
+      $random_name = str_random(16);
+      $destinationPath = 'video/';
+      $extension = $file->getClientOriginalExtension();
+      $filename = $random_name.'_video.'.$extension;
+      $uploadSuccess = Input::file('filevideo')->move($destinationPath,$filename);
+      $video = Video::where('slug',$slug)->fisrt();
+      $video->update([
+        'title' => $request->title,
+        'videos' => $filename,
+        'slug' => str_slug(sha1($request->title),'-'),
+        'status' => $request->status
+      ]);
+      return redirect()->route('video.index');
     }
 
     /**
@@ -83,8 +133,12 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Video $video)
+    public function destroy($slug)
     {
-        //
+        $del = Video::where('slug',$slug)->fisrt();
+        $file = public_path().'/video/'.$del->title;
+        \File::delete($file);
+        $del->delete();
+        return redirect()->route('video.index');
     }
 }

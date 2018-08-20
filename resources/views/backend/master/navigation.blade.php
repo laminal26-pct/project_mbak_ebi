@@ -131,13 +131,13 @@
         </li>
       </ul>
     </li>
-    <li class="{{set_active('info-relawan.index')}}">
+    <li class="{{set_active('info-relawan.index')}} {{set_active('info-relawan.create')}} {{set_active('info-relawan.edit')}} {{set_active('info-relawan.show')}}">
       <a href="{{route('info-relawan.index')}}">
         <i class="fa fa-users"></i>
         <span>Info Relawan</span>
       </a>
     </li>
-    <li class="{{set_active('video.index')}}">
+    <li class="{{set_active('video.index')}} {{set_active('video.create')}} {{set_active('video.edit')}} {{set_active('video.show')}}">
       <a href="{{route('video.index')}}">
         <i class="fa fa-video-camera"></i>
         <span>Video</span>
