@@ -38,7 +38,7 @@
                   <select class="form-control" name="join">
                     @php( $d = date('Y', strtotime('now')) )
                     @for ($i = 2010; $i <= $d; $i++)
-                      <option value="{{$i}}" {{ ($relawan->join == $i) ? 'selected="selected"' : ''}}>{{$i}}</option>
+                      <option value="{{$i}}" {{ ($relawan->joined == $i) ? 'selected="selected"' : ''}}>{{$i}}</option>
                     @endfor
                   </select>
                 </div>

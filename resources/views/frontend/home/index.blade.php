@@ -88,9 +88,15 @@
 
               <!-- BEGIN RIGHT SIDEBAR -->
               <div class="col-md-4 col-sm-4 blog-sidebar">
-                <video src="videofile.ogg" autoplay poster="posterimage.jpg" style="border: 1px solid #000" width="100%">
-
-                </video>
+                @if (count($video) > 0)
+                  @foreach ($video as $k)
+                    <video id="my_video_1" class="video-js vjs-default-skin" width="100%" height="267px" autoplay="true" loop="true" controls preload="none" poster='https://video-js.zencoder.com/oceans-clip.jpg'
+                        data-setup='{ "aspectRatio":"640:480", "playbackRates": [1, 1.5, 2] }'>
+                        <source src="{{url('video',$k->videos)}}" type='video/mp4' />
+                        <source src="{{url('video',$k->videos)}}" type='video/webm' />
+                    </video>
+                  @endforeach
+                @endif
                 <!-- CATEGORIES START -->
                 <h2 class="no-top-space">Kategori</h2>
                 <ul class="nav sidebar-categories margin-bottom-40">

@@ -59,7 +59,7 @@ class RelawanController extends Controller
           'nama' => $request->nama,
           'images' => $img,
           'slug' => str_slug(sha1($request->nama),'-'),
-          'join' => $request->join,
+          'joined' => $request->join,
           'status' => $request->post_status,
           'alamat' => $request->alamat
         ]);
@@ -120,8 +120,8 @@ class RelawanController extends Controller
       $relawan->update([
         'nama' => $request->nama,
         'images' => $img,
-        'join' => $request->join,
         'slug' => str_slug(sha1($request->nama),'-'),
+        'joined' => $request->join,
         'status' => $request->status,
         'alamat' => $request->alamat
       ]);

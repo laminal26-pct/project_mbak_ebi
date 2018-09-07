@@ -17,6 +17,7 @@ use App\Models\Album;
 use App\Models\Photo;
 use App\Models\Comment;
 use App\Models\Relawan;
+use App\Models\Video;
 use Session, Validator, Mail, DB;
 use App\Mail\Pemesanan;
 
@@ -34,13 +35,17 @@ class HomepageController extends Controller
     }
 
     public function relawanShow($slug) {
-      $relawan = Relawan::select('nama','images','status','alamat','join')->where('slug',$slug)->first();
+      $relawan = Relawan::select('nama','images','status','alamat','joined')->where('slug',$slug)->first();
       if ($relawan) {
         return response()->json($relawan, 201);
       }
       return response()->json(['message' => 'Not avaiable'],404);
     }
 
+    protected function video() {
+      $video = Video::where('status','Aktif')->get();
+      return $video;
+    }
     public function home()
     {
       $news = Berita::select('users.name','users.user_id','kategori_beritas.nama_kategori_berita','kategori_beritas.kategori_berita_id','beritas.*')
@@ -51,7 +56,8 @@ class HomepageController extends Controller
       $kategori = KategoriBerita::all();
       $slide = Berita::where('post_status','Publikasi')->where('headline','Ya')->limit(4)->get();
       $relawan = $this->relawan();
-      return view('frontend.home.index', compact('news','kategori','slide','active','relawan'));
+      $video = $this->video();
+      return view('frontend.home.index', compact('news','kategori','slide','active','relawan','video'));
     }
 
     public function v_berita($slug)

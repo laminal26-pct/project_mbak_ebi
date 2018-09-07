@@ -11,6 +11,6 @@ class Video extends Model
     public $primaryKey = "video_id";
 
     public $fillable = [
-      'title', 'vidoes', 'slug', 'status'
+      'title', 'videos', 'slug', 'status'
     ];
 }

@@ -23,7 +23,7 @@
                   <td>Status Relawan : {{$relawan->status}}</td>
                 </tr>
                 <tr>
-                  <td>Tahun Bergabung : {{$relawan->join}}</td>
+                  <td>Tahun Bergabung : {{$relawan->joined}}</td>
                 </tr>
                 <tr>
                   <td>Alamat Relawan : {{$relawan->alamat}}</td>

@@ -11,6 +11,6 @@ class Relawan extends Model
     public $primaryKey = "relawan_id";
 
     public $fillable = [
-      'nama', 'alamat', 'status', 'slug', 'images', 'join'
+      'nama', 'alamat', 'status', 'slug', 'images', 'joined'
     ];
 }

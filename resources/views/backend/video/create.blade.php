@@ -10,7 +10,7 @@
           <h3 class="box-title">Tambah Relawan</h3>
         </div>
         <div class="box-body">
-          {!! Form::open(['url' => route('info-relawan.store'), 'method' => 'post', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
+          {!! Form::open(['url' => route('video.store'), 'method' => 'post', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
             <div class="form-group {{$errors->has('name') ? 'has-error' : ''}}">
               <div class="form-group">
                 {!! Form::label('title','Judul Video', ['class' => 'col-md-2 control-label']) !!}

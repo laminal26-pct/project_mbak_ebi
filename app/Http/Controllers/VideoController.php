@@ -47,12 +47,12 @@ class VideoController extends Controller
           'title' => 'required', 'filevideo' => 'max:100040|required', 'status' => 'required'
         ];
 
-        $validator = Validator::make(request()->all(), $rules);
-        /*
-        if ($validator->fails()) {
-          return redirect()->back()->withErrors($validator)->withInput();
+        $check = Video::where('status','Aktif')->get()->count();
+        if ($check == 1) {
+          $status = "NonAktif";
+        } else {
+          $status = $request->post_status;
         }
-        */
         $file = Input::file('filevideo');
         $random_name = str_random(16);
         $destinationPath = 'video/';
@@ -63,7 +63,7 @@ class VideoController extends Controller
           'title' => $request->title,
           'videos' => $filename,
           'slug' => str_slug(sha1($request->title),'-'),
-          'status' => $request->status
+          'status' => $status
         ]);
         return redirect()->route('video.show',$video->slug);
     }
@@ -76,7 +76,7 @@ class VideoController extends Controller
      */
     public function show($slug)
     {
-        $video = Video::where('slug',$slug)->fisrt();
+        $video = Video::where('slug',$slug)->first();
         return view('backend.video.show', compact('video'));
     }
 
@@ -88,7 +88,7 @@ class VideoController extends Controller
      */
     public function edit($slug)
     {
-        $video = Video::where('slug',$slug)->fisrt();
+        $video = Video::where('slug',$slug)->first();
         return view('backend.video.edit',compact('video'));
     }
 
@@ -102,7 +102,7 @@ class VideoController extends Controller
     public function update(Request $request, $slug)
     {
       $rules = [
-        'title' => 'required', 'filevideo' => 'mimes:mp4,mkv,MP4,MKV|max:100040|required', 'status' => 'required'
+        'title' => 'required', 'status' => 'required'
       ];
 
       $validator = Validator::make(request()->all(), $rules);
@@ -110,19 +110,17 @@ class VideoController extends Controller
       if ($validator->fails()) {
         return redirect()->route('video.edit',$slug)->withErrors($validator)->withInput();
       }
-
-      $file = Input::file('filevideo');
-      $random_name = str_random(16);
-      $destinationPath = 'video/';
-      $extension = $file->getClientOriginalExtension();
-      $filename = $random_name.'_video.'.$extension;
-      $uploadSuccess = Input::file('filevideo')->move($destinationPath,$filename);
-      $video = Video::where('slug',$slug)->fisrt();
+      $check = Video::where('status','Aktif')->get()->count();
+      if ($check == 1) {
+        $status = "NonAktif";
+      } else {
+        $status = $request->status;
+      }
+      $video = Video::where('slug',$slug)->first();
       $video->update([
         'title' => $request->title,
-        'videos' => $filename,
         'slug' => str_slug(sha1($request->title),'-'),
-        'status' => $request->status
+        'status' => $status
       ]);
       return redirect()->route('video.index');
     }
@@ -135,8 +133,8 @@ class VideoController extends Controller
      */
     public function destroy($slug)
     {
-        $del = Video::where('slug',$slug)->fisrt();
-        $file = public_path().'/video/'.$del->title;
+        $del = Video::where('slug',$slug)->first();
+        $file = public_path().'/video/'.$del->videos;
         \File::delete($file);
         $del->delete();
         return redirect()->route('video.index');

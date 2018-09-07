@@ -151,7 +151,7 @@
                           "<td>Alamat Relawan : "+data.alamat+"</td>" +
                        "</tr>" +
                        "<tr>" +
-                          "<td>Tahun Gabung : "+data.join+"</td>" +
+                          "<td>Tahun Gabung : "+data.joined+"</td>" +
                        "</tr>";
               $('#detailtabel').append("<tbody>"+tr_str+"</tbody>");
             }
@@ -166,6 +166,23 @@
       return false;
       return true;
     }
+    $(function(){
+      var $refreshButton = $('#refresh');
+      var $results = $('#css_result');
+
+      function refresh(){
+        var css = $('style.cp-pen-styles').text();
+        $results.html(css);
+      }
+
+      refresh();
+      $refreshButton.click(refresh);
+
+      // Select all the contents when clicked
+      $results.click(function(){
+        $(this).select();
+      });
+    });
   </script>
   @yield('extra-js')
   <!-- END PAGE LEVEL JAVASCRIPTS -->
